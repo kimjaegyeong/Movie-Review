@@ -4,6 +4,8 @@ import com.example.mreview.entity.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.IntStream;
 
@@ -11,6 +13,8 @@ import java.util.stream.IntStream;
 public class MemberRepositoryTests {
     @Autowired
     private  MemberRepository memberRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     @Test
     public void insertMembers(){
@@ -23,5 +27,14 @@ public class MemberRepositoryTests {
             memberRepository.save(member);
         });
     }
+    @Test
+    @Transactional
+    @Commit
+    public void testDeleteMember(){
+        Long mid = 1L;
+        Member member = Member.builder().mid(mid).build();
 
+        reviewRepository.deleteByMember(member);
+        memberRepository.deleteById(mid);
+    }
 }

@@ -12,6 +12,8 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
@@ -43,6 +45,10 @@ public class MovieRepositoryTests {
         });
     }
     @Test
+    public void readMovie(){
+        Optional<Movie> movie = movieRepository.findById(10L);
+    }
+    @Test
     public void testListPage(){
         PageRequest pageRequest = PageRequest.of(0,10, Sort.by(Sort.Direction.DESC,"mno"));
         Page<Object[]> result = movieRepository.getListPage(pageRequest);
@@ -50,4 +56,25 @@ public class MovieRepositoryTests {
             System.out.println(Arrays.toString(objects));
         }
     }
+    @Test
+    public void testListPage_latestImg(){
+        PageRequest pageRequest = PageRequest.of(0,10, Sort.by(Sort.Direction.DESC,"mno"));
+       Page<Object[]> result = movieRepository.getListPage_latestImg(pageRequest);
+        for(Object[] objects : result.getContent()){
+            System.out.println(Arrays.toString(objects));
+        }
+    }
+
+    @Test
+    public void testGetMovieWithAll(){
+        List<Object[]> result = movieRepository.getMovieWithAll(30L);
+        System.out.println(result);
+
+        for(Object[] arr: result){
+            System.out.println(Arrays.toString(arr));
+        }
+    }
+
+
+
 }
