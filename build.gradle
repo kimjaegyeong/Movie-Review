@@ -32,9 +32,11 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.12'    /* thumbnailator */
     //mysql 연동
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1'
     runtimeOnly 'mysql:mysql-connector-java:8.0.25'
+
 }
 
 tasks.named('test') {

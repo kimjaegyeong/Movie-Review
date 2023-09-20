@@ -33,13 +33,36 @@
             function showUploadedImages(arr){
                 console.log(arr);
                 var divArea = $(".uploadResult");
+                var str="";
                 for(var i=0; i<arr.length; i++){
-                    divArea.append("<img src='/display?fileName="+arr[i].imageURL+"'>'");
+                    str+= "<div>";
+                    str+="<img src='/display?fileName="+arr[i].thumbnailURL+"'>";
+                    str+="<button class='removeBtn' data-name='"+arr[i].imageURL+"'>Remove</button>"
+                    str+="</div>";
                 }
+                divArea.append(str);
             }
         </script>
     </div>
+<script>
+    $(".uploadResult").on("click",".removeBtn",function(e){
+        var target= $(this);
+        var fileName = target.data("name"); //data-name 커스텀 태그의 내용을 가져오나봄
+        var targetDiv = $(this).closest("div"); //removeBtn과 가장 가까운 div 태그 -> 동적으로 생성되는 태그
 
+        console.log(target); //button.removeBtn
+        console.log(fileName);
+        console.log(targetDiv); //div (동적으로 생성되는 div)
+
+        //post방식으로 삭제 작업 호출
+        $.post('/removeFile', {fileName : fileName}, function(result){ //fileName : fileName 이 매개변수로 전달하는거인듯
+            console.log(result);
+            if(result===true){
+                targetDiv.remove(); //div 지우기
+            }
+        })
+    });
+</script>
 <script>
     //Ajax 업로드 처리
     $('.uploadBtn').click(function(){
