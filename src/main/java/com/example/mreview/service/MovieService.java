@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public interface MovieService {
     Long register(MovieDTO movieDTO);
     PageResultDTO<MovieDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
+    MovieDTO getMovie(Long mno);
 
     default Map<String, Object> dtoToEntity(MovieDTO movieDTO){
         //Map타입으로 반환
