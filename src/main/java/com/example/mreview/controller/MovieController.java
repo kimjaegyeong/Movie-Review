@@ -41,7 +41,7 @@ public class MovieController {
 
     @GetMapping({"/read","/modify"})
     public void read(long mno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO , Model model){
-        log.info(mno+": mon");
+        log.info(mno+": mno");
         MovieDTO movieDTO = movieService.getMovie(mno);
         model.addAttribute("dto", movieDTO);
 

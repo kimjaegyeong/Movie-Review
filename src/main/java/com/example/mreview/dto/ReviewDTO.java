@@ -20,6 +20,4 @@ public class ReviewDTO {
     private int grade;
     private String text;
     private LocalDateTime regDate,modDate;
-
-
 }
