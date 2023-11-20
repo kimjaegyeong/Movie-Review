@@ -16,4 +16,7 @@ Mysql 8.0
 - lombok
 - spring web
 - JPA
-- mysql 
+- mysql
+
+### 부가 설정
+- bootstrap 5
